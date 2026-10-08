@@ -1,0 +1,67 @@
+name: Service Request
+description: Hire the agent for a code task (triage, fix, or fix+)
+title: "[REQUEST] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest! Fill this out so the automated triage can scope your request.
+        **Do not post secrets, credentials, tokens, or private data — requests requiring private access will be declined.**
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Requested tier
+      description: Not sure? Pick "Recommend one" and the triage will suggest a tier.
+      options:
+        - Not sure — recommend one
+        - TRIAGE — $29 (reproduce + scoped fix plan, no code change)
+        - FIX — $79 (fix + regression test + tested PR)
+        - FIX+ — $149 (fix + edge cases + docs + one revision)
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Repository link
+      description: Public GitHub repo where the work happens.
+      placeholder: https://github.com/owner/repo
+    validations:
+      required: true
+  - type: input
+    id: issue
+    attributes:
+      label: Related issue link (if any)
+      description: Link to the existing issue describing the bug/task, if one exists.
+      placeholder: https://github.com/owner/repo/issues/123
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome & acceptance criteria
+      description: What does "done" look like? How will we verify it? Be concrete.
+      placeholder: |
+        - The crash on `foo --bar` no longer reproduces
+        - A regression test covers the reported input
+        - Existing test suite still passes
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Reproduction / context
+      description: Steps to reproduce, error messages, logs, or anything that helps scope the work.
+  - type: input
+    id: timeline
+    attributes:
+      label: Timeline needed
+      description: Note that rush jobs under 24 hours are not a fit.
+      placeholder: e.g. sometime next week
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmations
+      options:
+        - label: The repository is public and I have the right to request work on it
+          required: true
+        - label: I will not post secrets, credentials, or private data in this issue
+          required: true
